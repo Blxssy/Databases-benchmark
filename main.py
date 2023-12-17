@@ -1,39 +1,37 @@
 import time
+import matplotlib.pyplot as plot
+import numpy as np
 
 from libs import Pandas, PostgreSQL, SQLAlchemy, SQLite, DuckDB
 
-while True:
-    print("Benchmark")
-    print("1: SQLite")
-    print("2: Pandas")
-    print("3: SqlAlchemy")
-    print("4: PostgresSQL")
-    print("5: DuckDB")
+plot.title('Benchmark results')
 
-    userInput = input()
+width = 0.15
+plot.grid()
+x = [0, 1, 2, 3]
+xInd = np.arange(len(x))
+plot.xticks(xInd, ['Query1', 'Query2', 'Query3', 'Query4'])
 
-    if userInput == 'x': # Quit
-        break
+res1 = SQLite.query_sqlite()
+print("SQLite ", *res1)
+plot.bar(xInd- (width), res1, label="SQLite", width=width)
 
-    elif userInput == '1': # SQLite
-        print("Benchmarking SQLite")
-        print(SQLite.query_sqlite())
+res2 = Pandas.query_pandas()
+print("Pandas ", *res2)
+plot.bar(xInd + width, res2, label="Pandas", width=width)
 
+res3 = PostgreSQL.query_Pg()
+print("Postgre ", *res3)
+plot.bar(xInd-(width*2), res3, label="Postgre", width=width)
 
-    elif userInput == '2': # Pandas
-        print("Benchmarking Pandas")
-        print(Pandas.query_pandas())
+res4 = SQLAlchemy.query_SQLAlchemy()
+print("SQLAlchemy ", *res4)
+plot.bar(xInd + (2*width), res4, label="SQLAlchemy", width=width)
 
-    elif userInput == '3':
-        print("Benchmarking SqlAlchemy")
-        print(SQLAlchemy.query_SQLAlchemy())
-
-
-    elif userInput == '4':
-        print("Benchmarking PostgreSQL")
-        print(PostgreSQL.query_Pg())
+res5 = DuckDB.query_duckdb()
+print("DuckDB ", *res5)
+plot.bar(xInd, res5, label="DuckDB", width=width)
 
 
-    elif userInput == '5':
-        print("Benchmarking DuckDB")
-        print(DuckDB.query_duckdb())
+plot.legend()
+plot.show()
