@@ -2,12 +2,6 @@ import time
 
 from libs import Pandas, PostgreSQL, SQLAlchemy, SQLite, DuckDB
 
-averageTime = 0
-totalTime = 0
-
-testsCount = 3
-
-
 while True:
     print("Benchmark")
     print("1: SQLite")
