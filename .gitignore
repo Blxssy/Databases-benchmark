@@ -1,0 +1,8 @@
+/venv
+/nyc_yellow_tiny.csv
+/data.csv
+/identifier.sqlite
+/.idea
+/.DS_Store
+__pycache__/
+libs/.DS_Store
